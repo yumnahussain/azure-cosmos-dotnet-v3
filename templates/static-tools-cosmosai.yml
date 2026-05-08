@@ -2,7 +2,6 @@
 
 parameters:
   BuildConfiguration: ''
-  VmImage: ''
 
 jobs:
 - job:

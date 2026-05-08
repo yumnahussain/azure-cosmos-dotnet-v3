@@ -15,7 +15,6 @@ stages:
     - template:  templates/static-tools-cosmosai.yml
       parameters:
         BuildConfiguration: '${{ variables.BuildConfiguration }}'
-        VmImage: '${{ variables.VmImage }}'
 
 - stage:
   displayName: Build, Pack and Publish
@@ -23,7 +22,6 @@ stages:
     - template:  templates/cosmosai-nuget-pack.yml
       parameters:
         BuildConfiguration: Release
-        VmImage: '${{ variables.VmImage }}'
         ReleasePackage: true
         OutputPath: '$(Build.ArtifactStagingDirectory)/bin/AnyCPU/$(BuildConfiguration)/Microsoft.Azure.Cosmos.AI'
         BlobVersion: $(BlobVersion)

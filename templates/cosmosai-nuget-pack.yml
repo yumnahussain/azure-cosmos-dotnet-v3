@@ -7,9 +7,6 @@ parameters:
   - name: Arguments
     type: string
     default: ''
-  - name: VmImage
-    type: string
-    default: ''
   - name: OutputPath
     type: string
     default: ''
@@ -73,7 +70,7 @@ jobs:
           BlobPrefix: 'cosmosdb/csharp/cosmosai/$(BlobVersion)'
           CleanTargetBeforeCopy: ${{ parameters.CleanupFolder }}
 
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifacts: Microsoft.Azure.Cosmos.AI'
-    inputs:
-      artifactName: Microsoft.Azure.Cosmos.AI
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifacts: Microsoft.Azure.Cosmos.AI'
+      inputs:
+        artifactName: Microsoft.Azure.Cosmos.AI
