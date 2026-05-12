@@ -65,9 +65,21 @@ namespace Microsoft.Azure.Cosmos
         /// Implementations should honor cancellation.
         /// </param>
         /// <returns>
-        /// A task that resolves to a sequence of <see cref="float"/> embedding vectors
+        /// A task that resolves to a sequence of <see cref="float"/> (float32) embedding vectors
         /// with the same cardinality and ordering as <paramref name="text"/>.
         /// </returns>
+        /// <remarks>
+        /// <para>
+        /// <b>Why float32?</b> Embedding models (including Azure OpenAI text-embedding models)
+        /// always produce float32 vectors. The <c>datatype</c> property in a container's
+        /// <see cref="VectorEmbeddingPolicy"/> (e.g. <c>int8</c>, <c>uint8</c>, <c>float16</c>)
+        /// describes how vectors are <i>stored and indexed</i> — it is a storage-side quantization
+        /// that the service applies at write time. The query vector produced by this method is
+        /// always sent as float32; the service handles the type-compatible distance computation
+        /// internally. No API change is needed to support containers whose stored datatype is
+        /// <c>int8</c> or <c>uint8</c>.
+        /// </para>
+        /// </remarks>
         Task<IEnumerable<ReadOnlyMemory<float>>> GenerateEmbeddingsAsync(
             IEnumerable<string> text,
             CancellationToken cancellationToken = default);

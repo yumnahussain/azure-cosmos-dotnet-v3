@@ -355,6 +355,22 @@
       },
       "NestedTypes": {}
     },
+    "Microsoft.Azure.Cosmos.CosmosClient;System.Object;IsAbstract:False;IsSealed:False;IsInterface:False;IsEnum:False;IsClass:True;IsValueType:False;IsNested:False;IsGenericType:False;IsSerializable:False": {
+      "Subclasses": {},
+      "Members": {
+        "Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator EmbeddingGenerator": {
+          "Type": "Property",
+          "Attributes": [],
+          "MethodInfo": "Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator EmbeddingGenerator;CanRead:True;CanWrite:False;Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator get_EmbeddingGenerator();IsAbstract:False;IsStatic:False;IsVirtual:True;IsGenericMethod:False;IsConstructor:False;IsFinal:False;"
+        },
+        "Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator get_EmbeddingGenerator()": {
+          "Type": "Method",
+          "Attributes": [],
+          "MethodInfo": "Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator get_EmbeddingGenerator();IsAbstract:False;IsStatic:False;IsVirtual:True;IsGenericMethod:False;IsConstructor:False;IsFinal:False;"
+        }
+      },
+      "NestedTypes": {}
+    },
     "Microsoft.Azure.Cosmos.CosmosClientOptions;System.Object;IsAbstract:False;IsSealed:False;IsInterface:False;IsEnum:False;IsClass:True;IsValueType:False;IsNested:False;IsGenericType:False;IsSerializable:False": {
       "Subclasses": {},
       "Members": {

@@ -607,6 +607,18 @@ namespace Microsoft.Azure.Cosmos
         /// <remarks>This property is read-only. Modifying any options after the client has been created has no effect on the existing client instance.</remarks>
         public virtual CosmosClientOptions ClientOptions => this.ClientContext.ClientOptions;
 
+#if PREVIEW
+        /// <summary>
+        /// Gets the <see cref="ICosmosEmbeddingGenerator"/> configured for this client, or <c>null</c> if none was set.
+        /// </summary>
+        /// <remarks>
+        /// This is the client-wide default set via <see cref="CosmosClientOptions.EmbeddingGenerator"/>
+        /// or <see cref="Fluent.CosmosClientBuilder.WithEmbeddingGenerator"/>.
+        /// A per-request <see cref="QueryRequestOptions.EmbeddingGenerator"/> takes precedence when both are set.
+        /// </remarks>
+        public virtual ICosmosEmbeddingGenerator EmbeddingGenerator => this.ClientContext.ClientOptions.EmbeddingGenerator;
+#endif
+
         /// <summary>
         /// The response factory used to create CosmosClient response types.
         /// </summary>
