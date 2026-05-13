@@ -875,8 +875,8 @@ namespace Microsoft.Azure.Cosmos.Fluent
         /// queries that contain literal text to be embedded.
         /// </summary>
         /// <remarks>
-        /// This is the client-wide default. If <see cref="QueryRequestOptions.EmbeddingGenerator"/> is
-        /// also set on a specific request, the request-level value takes precedence.
+        /// This is the client-wide default. The generator is invoked when a query plan returned by the
+        /// gateway includes an embedding parameter map.
         /// </remarks>
         /// <param name="embeddingGenerator">The embedding generator to use as the client-wide default.</param>
         /// <returns>The current <see cref="CosmosClientBuilder"/>.</returns>

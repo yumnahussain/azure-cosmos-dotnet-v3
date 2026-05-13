@@ -614,7 +614,6 @@ namespace Microsoft.Azure.Cosmos
         /// <remarks>
         /// This is the client-wide default set via <see cref="CosmosClientOptions.EmbeddingGenerator"/>
         /// or <see cref="Fluent.CosmosClientBuilder.WithEmbeddingGenerator"/>.
-        /// A per-request <see cref="QueryRequestOptions.EmbeddingGenerator"/> takes precedence when both are set.
         /// </remarks>
         public virtual ICosmosEmbeddingGenerator EmbeddingGenerator => this.ClientContext.ClientOptions.EmbeddingGenerator;
 #endif

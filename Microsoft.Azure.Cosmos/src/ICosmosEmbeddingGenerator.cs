@@ -28,9 +28,8 @@ namespace Microsoft.Azure.Cosmos
     /// rewritten query before per-partition execution.
     /// </para>
     /// <para>
-    /// Set an instance on <see cref="QueryRequestOptions.EmbeddingGenerator"/> for a
-    /// per-request generator, or on <see cref="CosmosClientOptions.EmbeddingGenerator"/>
-    /// for a client-wide default. The request-level value takes precedence when both are set.
+    /// Set an instance on <see cref="CosmosClientOptions.EmbeddingGenerator"/>
+    /// for a client-wide default.
     /// </para>
     /// <para>
     /// <b>Thread safety:</b> implementations MUST be safe to invoke concurrently.

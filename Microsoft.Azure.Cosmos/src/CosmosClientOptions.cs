@@ -410,10 +410,9 @@ namespace Microsoft.Azure.Cosmos
         /// queries that contain literal text to be embedded.
         /// </summary>
         /// <remarks>
-        /// This is the client-wide default. If <see cref="QueryRequestOptions.EmbeddingGenerator"/> is
-        /// also set on a specific request, the request-level value takes precedence.
-        /// If the gateway returns a plan that requires embedding generation and neither the request-level
-        /// nor this property is set, the SDK throws an exception describing how to configure a generator.
+        /// This is the client-wide default.
+        /// If the gateway returns a plan that requires embedding generation and this property is not set,
+        /// the SDK throws an exception describing how to configure a generator.
         /// </remarks>
         [JsonIgnore]
 #if PREVIEW
