@@ -38,11 +38,16 @@ namespace Microsoft.Azure.Cosmos
                             isMinInclusive: true,
                             isMaxInclusive: false);
 
+#if PREVIEW
+        private readonly ICosmosEmbeddingGenerator embeddingGenerator;
+#endif
+
         protected ContainerCore(
             CosmosClientContext clientContext,
             DatabaseInternal database,
             string containerId,
-            CosmosQueryClient cosmosQueryClient = null)
+            CosmosQueryClient cosmosQueryClient = null,
+            ICosmosEmbeddingGenerator embeddingGenerator = null)
         {
             this.Id = containerId;
             this.ClientContext = clientContext;
@@ -57,6 +62,9 @@ namespace Microsoft.Azure.Cosmos
             this.cachedUriSegmentWithoutId = this.GetResourceSegmentUriWithoutId();
             this.queryClient = cosmosQueryClient ?? new CosmosQueryClientCore(this.ClientContext, this);
             this.lazyBatchExecutor = new Lazy<BatchAsyncContainerExecutor>(() => this.ClientContext.GetExecutorForContainer(this));
+#if PREVIEW
+            this.embeddingGenerator = embeddingGenerator;
+#endif
         }
 
         public override string Id { get; }
@@ -72,6 +80,11 @@ namespace Microsoft.Azure.Cosmos
         public override Conflicts Conflicts { get; }
 
         public override Scripts.Scripts Scripts { get; }
+
+#if PREVIEW
+        public override ICosmosEmbeddingGenerator EmbeddingGenerator =>
+            this.embeddingGenerator ?? this.ClientContext.ClientOptions.EmbeddingGenerator;
+#endif
 
         public async Task<ContainerResponse> ReadContainerAsync(
             ITrace trace,

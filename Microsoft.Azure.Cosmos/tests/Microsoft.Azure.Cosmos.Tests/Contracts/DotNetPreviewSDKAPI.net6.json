@@ -314,6 +314,16 @@
           "Attributes": [],
           "MethodInfo": "Microsoft.Azure.Cosmos.ChangeFeedProcessorBuilder GetChangeFeedProcessorBuilderWithAllVersionsAndDeletes[T](System.String, ChangeFeedHandler`1);IsAbstract:True;IsStatic:False;IsVirtual:True;IsGenericMethod:True;IsConstructor:False;IsFinal:False;"
         },
+        "Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator EmbeddingGenerator": {
+          "Type": "Property",
+          "Attributes": [],
+          "MethodInfo": "Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator EmbeddingGenerator;CanRead:True;CanWrite:False;Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator get_EmbeddingGenerator();IsAbstract:False;IsStatic:False;IsVirtual:True;IsGenericMethod:False;IsConstructor:False;IsFinal:False;"
+        },
+        "Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator get_EmbeddingGenerator()": {
+          "Type": "Method",
+          "Attributes": [],
+          "MethodInfo": "Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator get_EmbeddingGenerator();IsAbstract:False;IsStatic:False;IsVirtual:True;IsGenericMethod:False;IsConstructor:False;IsFinal:False;"
+        },
         "System.Threading.Tasks.Task`1[Microsoft.Azure.Cosmos.SemanticRerankResult] SemanticRerankAsync(System.String, System.Collections.Generic.IEnumerable`1[System.String], System.Collections.Generic.IDictionary`2[System.String,System.Object], System.Threading.CancellationToken)": {
           "Type": "Method",
           "Attributes": [],
@@ -358,6 +368,11 @@
     "Microsoft.Azure.Cosmos.CosmosClient;System.Object;IsAbstract:False;IsSealed:False;IsInterface:False;IsEnum:False;IsClass:True;IsValueType:False;IsNested:False;IsGenericType:False;IsSerializable:False": {
       "Subclasses": {},
       "Members": {
+        "Microsoft.Azure.Cosmos.Container GetContainer(System.String, System.String, Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator)": {
+          "Type": "Method",
+          "Attributes": [],
+          "MethodInfo": "Microsoft.Azure.Cosmos.Container GetContainer(System.String, System.String, Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator);IsAbstract:False;IsStatic:False;IsVirtual:True;IsGenericMethod:False;IsConstructor:False;IsFinal:False;"
+        },
         "Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator EmbeddingGenerator": {
           "Type": "Property",
           "Attributes": [],
@@ -1254,6 +1269,17 @@
           "Type": "Field",
           "Attributes": [],
           "MethodInfo": "System.String Sec;IsInitOnly:False;IsStatic:True;"
+        }
+      },
+      "NestedTypes": {}
+    },
+    "Microsoft.Azure.Cosmos.Database;System.Object;IsAbstract:True;IsSealed:False;IsInterface:False;IsEnum:False;IsClass:True;IsValueType:False;IsNested:False;IsGenericType:False;IsSerializable:False": {
+      "Subclasses": {},
+      "Members": {
+        "Microsoft.Azure.Cosmos.Container GetContainer(System.String, Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator)": {
+          "Type": "Method",
+          "Attributes": [],
+          "MethodInfo": "Microsoft.Azure.Cosmos.Container GetContainer(System.String, Microsoft.Azure.Cosmos.ICosmosEmbeddingGenerator);IsAbstract:False;IsStatic:False;IsVirtual:True;IsGenericMethod:False;IsConstructor:False;IsFinal:False;"
         }
       },
       "NestedTypes": {}

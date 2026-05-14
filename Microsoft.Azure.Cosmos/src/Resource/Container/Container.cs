@@ -46,6 +46,16 @@ namespace Microsoft.Azure.Cosmos
         /// </summary>
         public abstract Scripts.Scripts Scripts { get; }
 
+#if PREVIEW
+        /// <summary>
+        /// Gets the <see cref="ICosmosEmbeddingGenerator"/> configured for this container, or <c>null</c> if none was set.
+        /// When not set at the container level, falls back to <see cref="CosmosClient.EmbeddingGenerator"/>.
+        /// Set a container-level generator via <see cref="Database.GetContainer(string, ICosmosEmbeddingGenerator)"/>
+        /// or <see cref="CosmosClient.GetContainer(string, string, ICosmosEmbeddingGenerator)"/>.
+        /// </summary>
+        public virtual ICosmosEmbeddingGenerator EmbeddingGenerator => null;
+#endif
+
         /// <summary>
         /// Reads a <see cref="ContainerProperties"/> from the Azure Cosmos service as an asynchronous operation.
         /// </summary>

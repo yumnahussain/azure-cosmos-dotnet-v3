@@ -24,11 +24,13 @@ namespace Microsoft.Azure.Cosmos
             CosmosClientContext clientContext,
             DatabaseInternal database,
             string containerId,
-            CosmosQueryClient cosmosQueryClient = null)
+            CosmosQueryClient cosmosQueryClient = null,
+            ICosmosEmbeddingGenerator embeddingGenerator = null)
             : base(clientContext,
                 database,
                 containerId,
-                cosmosQueryClient)
+                cosmosQueryClient,
+                embeddingGenerator)
         {
         }
 

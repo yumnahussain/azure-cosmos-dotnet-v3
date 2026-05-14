@@ -724,6 +724,41 @@ namespace Microsoft.Azure.Cosmos
             return this.GetDatabase(databaseId).GetContainer(containerId);
         }
 
+#if PREVIEW
+        /// <summary>
+        /// Returns a proxy reference to a container with a container-level <see cref="ICosmosEmbeddingGenerator"/>.
+        /// The generator set here takes precedence over any generator configured on <see cref="CosmosClientOptions"/>.
+        /// This is useful when different containers use different embedding models or endpoints,
+        /// since the embedding policy (model, dimensions) is defined per container.
+        /// </summary>
+        /// <param name="databaseId">Cosmos database name.</param>
+        /// <param name="containerId">Cosmos container name.</param>
+        /// <param name="embeddingGenerator">
+        /// The <see cref="ICosmosEmbeddingGenerator"/> to use for vector embedding generation on this container.
+        /// Must not be null.
+        /// </param>
+        /// <returns>Cosmos container proxy with the specified embedding generator.</returns>
+        public virtual Container GetContainer(string databaseId, string containerId, ICosmosEmbeddingGenerator embeddingGenerator)
+        {
+            if (string.IsNullOrEmpty(databaseId))
+            {
+                throw new ArgumentNullException(nameof(databaseId));
+            }
+
+            if (string.IsNullOrEmpty(containerId))
+            {
+                throw new ArgumentNullException(nameof(containerId));
+            }
+
+            if (embeddingGenerator == null)
+            {
+                throw new ArgumentNullException(nameof(embeddingGenerator));
+            }
+
+            return this.GetDatabase(databaseId).GetContainer(containerId, embeddingGenerator);
+        }
+#endif
+
         /// <summary>
         /// Sends a request for creating a database.
         ///

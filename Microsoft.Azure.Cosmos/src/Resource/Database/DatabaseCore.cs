@@ -434,6 +434,27 @@ namespace Microsoft.Azure.Cosmos
                     id);
         }
 
+#if PREVIEW
+        public override Container GetContainer(string id, ICosmosEmbeddingGenerator embeddingGenerator)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (embeddingGenerator == null)
+            {
+                throw new ArgumentNullException(nameof(embeddingGenerator));
+            }
+
+            return new ContainerInlineCore(
+                    this.ClientContext,
+                    this,
+                    id,
+                    embeddingGenerator: embeddingGenerator);
+        }
+#endif
+
         public Task<ResponseMessage> CreateContainerStreamAsync(
             ContainerProperties containerProperties,
             int? throughput,

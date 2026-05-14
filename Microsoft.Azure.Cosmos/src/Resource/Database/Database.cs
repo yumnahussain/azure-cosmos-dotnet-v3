@@ -4,6 +4,7 @@
 
 namespace Microsoft.Azure.Cosmos
 {
+    using System;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Azure.Cosmos.Fluent;
@@ -402,6 +403,28 @@ namespace Microsoft.Azure.Cosmos
         /// </code>
         /// </example>
         public abstract Container GetContainer(string id);
+
+#if PREVIEW
+        /// <summary>
+        /// Returns a proxy reference to a container with a container-level <see cref="ICosmosEmbeddingGenerator"/>.
+        /// The generator set here takes precedence over any generator configured on <see cref="CosmosClientOptions"/>.
+        /// This is useful when different containers use different embedding models or endpoints.
+        /// </summary>
+        /// <param name="id">The Cosmos container id.</param>
+        /// <param name="embeddingGenerator">
+        /// The <see cref="ICosmosEmbeddingGenerator"/> to use for vector embedding generation on this container.
+        /// Must not be null.
+        /// </param>
+        /// <returns>Cosmos container proxy with the specified embedding generator.</returns>
+        /// <remarks>
+        /// Returns a Container reference. Reference doesn't guarantee existence.
+        /// Please ensure container already exists or is created through a create operation.
+        /// </remarks>
+        public virtual Container GetContainer(string id, ICosmosEmbeddingGenerator embeddingGenerator)
+        {
+            throw new NotImplementedException();
+        }
+#endif
 
         /// <summary>
         /// Creates a container as an asynchronous operation in the Azure Cosmos service.
