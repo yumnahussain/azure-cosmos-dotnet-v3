@@ -10,40 +10,14 @@ namespace Microsoft.Azure.Cosmos
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Defines a contract for generating vector embeddings from one or more
-    /// input text strings. The Azure Cosmos DB SDK invokes this generator when a
-    /// query plan returned by the gateway includes an embedding parameter map,
-    /// for example for hybrid or vector-search queries that contain literal text
-    /// to be embedded such as
-    /// <c>ORDER BY RANK VectorDistance(c.text, 'big brown cat')</c>.
+    /// Defines a contract for generating float32 vector embeddings from input text strings.
+    /// The SDK invokes this when a query plan includes an embedding parameter (e.g. hybrid or
+    /// vector-search queries with literal text such as
+    /// <c>ORDER BY RANK VectorDistance(c.text, 'big brown cat')</c>).
+    /// Set an instance on <see cref="CosmosClientOptions.EmbeddingGenerator"/> for a client-wide
+    /// default. Implementations MUST be thread-safe and are responsible for any caching, retries,
+    /// and authentication required to call the underlying embedding service.
     /// </summary>
-    /// <remarks>
-    /// <para>
-    /// The SDK collects every input string referenced by the gateway-returned
-    /// embedding parameter map and passes them to
-    /// <see cref="GenerateEmbeddingsAsync(IEnumerable{string}, CancellationToken)"/>
-    /// in a single batched call. The implementation MUST return the resulting
-    /// embeddings in the same order as the input strings, with the same count.
-    /// The SDK then injects each returned vector as a parameter on the
-    /// rewritten query before per-partition execution.
-    /// </para>
-    /// <para>
-    /// Set an instance on <see cref="CosmosClientOptions.EmbeddingGenerator"/>
-    /// for a client-wide default.
-    /// </para>
-    /// <para>
-    /// <b>Thread safety:</b> implementations MUST be safe to invoke concurrently.
-    /// When configured at the client level via <see cref="CosmosClientOptions.EmbeddingGenerator"/>,
-    /// the SDK may call <see cref="GenerateEmbeddingsAsync"/> simultaneously from multiple
-    /// parallel queries or partition reads on the same instance. Stateful implementations
-    /// (e.g., those that maintain HTTP connections, caches, or counters) must synchronize
-    /// access appropriately.
-    /// </para>
-    /// <para>
-    /// Implementations are responsible for any caching, retries, and
-    /// authentication required to call the underlying embedding service.
-    /// </para>
-    /// </remarks>
 #if PREVIEW
     public
 #else
@@ -64,21 +38,13 @@ namespace Microsoft.Azure.Cosmos
         /// Implementations should honor cancellation.
         /// </param>
         /// <returns>
-        /// A task that resolves to a sequence of <see cref="float"/> (float32) embedding vectors
-        /// with the same cardinality and ordering as <paramref name="text"/>.
+        /// A task that resolves to a sequence of float32 embedding vectors with the same
+        /// cardinality and ordering as <paramref name="text"/>. Embedding models always produce
+        /// float32 vectors. The <c>datatype</c> in a container's <see cref="VectorEmbeddingPolicy"/>
+        /// (e.g. <c>int8</c>, <c>uint8</c>, <c>float16</c>) describes how vectors are stored and
+        /// indexed — the service applies any quantization at write time. Query vectors are always
+        /// sent as float32 regardless of the container's stored datatype.
         /// </returns>
-        /// <remarks>
-        /// <para>
-        /// <b>Why float32?</b> Embedding models (including Azure OpenAI text-embedding models)
-        /// always produce float32 vectors. The <c>datatype</c> property in a container's
-        /// <see cref="VectorEmbeddingPolicy"/> (e.g. <c>int8</c>, <c>uint8</c>, <c>float16</c>)
-        /// describes how vectors are <i>stored and indexed</i> — it is a storage-side quantization
-        /// that the service applies at write time. The query vector produced by this method is
-        /// always sent as float32; the service handles the type-compatible distance computation
-        /// internally. No API change is needed to support containers whose stored datatype is
-        /// <c>int8</c> or <c>uint8</c>.
-        /// </para>
-        /// </remarks>
         Task<IEnumerable<ReadOnlyMemory<float>>> GenerateEmbeddingsAsync(
             IEnumerable<string> text,
             CancellationToken cancellationToken = default);
